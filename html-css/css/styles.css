@@ -91,7 +91,19 @@ div.bg-img {
 }
 
 div.bg-img:hover { 
-    background: none;
+    background: url('https://images.unsplash.com/photo-1631283795769-084cf3e90924?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2540&q=80');
+}
+
+.preview {
+    margin: 2rem;
+}
+
+.preview iframe {
+    display: none;
+}
+
+.preview a:hover + iframe {
+    display: block;
 }
 
 @media screen and (min-width: 768px) {

@@ -1,0 +1,66 @@
+html {
+    font-family: 'Helvetica';
+}
+
+section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 2rem;
+}
+
+section img {
+    max-width: 100%;
+}
+
+section > div {
+    overflow-x: hidden;
+}
+
+section h2 {
+    font-size: 2rem;
+}
+
+section p {
+    color: #666;
+}
+
+section .buttons {
+    display: flex;
+    align-items: center;
+    margin: 2rem 0;
+}
+
+section .buttons button {
+    background-color: orangered;
+    border: none;
+    padding: 0.6rem 0.8rem;
+    color: white;
+}
+
+section .buttons a {
+    color: orangered;
+    margin-left: 1rem;
+}
+
+section .trusted span {
+    display: block;
+    font-weight: bold;
+    font-size: 0.8rem;
+    margin-bottom: 1rem;
+}
+
+section .trusted .logos {
+    display: flex;
+    align-items: center;
+    max-width: 100%;
+    flex-wrap: wrap;
+}
+
+section .trusted .logos img {
+    max-width: 96px;
+}
+
+section .trusted .logos img:not(:last-child) {
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+}
