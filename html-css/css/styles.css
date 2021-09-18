@@ -90,6 +90,10 @@ div.bg-img {
     background-repeat: no-repeat;
 }
 
+div.bg-img:hover { 
+    background: none;
+}
+
 @media screen and (min-width: 768px) {
     h1 {
         color: #00f;

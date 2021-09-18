@@ -1,0 +1,65 @@
+:root {
+    --buttons-height: 36px;
+    --nav-bg-color: #F8F9FD;
+}
+
+html {
+    font-family: 'Helvetica';
+}
+
+.nav {
+    background-color: var(--nav-bg-color);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.6rem 0;
+}
+
+.logo img {
+    max-height: var(--buttons-height);
+}
+
+.links {
+    color: #3D5271;
+}
+
+.links a {
+    margin: 0 0.4rem;
+    cursor: pointer;
+}
+
+.links a:hover {
+    text-decoration: underline;
+}
+
+.buttons button {
+    height: var(--buttons-height);
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+}
+
+.buttons button.outlined {
+    border: 1px solid #3D5271;
+    background: var(--nav-bg-color);
+    color: #3D5271;
+}
+
+.buttons button.primary {
+    border: 1px solid #3D5271;
+    background: #3D5271;
+    color: white;
+}
+
+/*
+.buttons button:first-child {
+    border: 1px solid #3D5271;
+    background: white;
+}
+
+.buttons button:last-child {
+    border: 1px solid #3D5271;
+    background: #3D5271;
+    color: white;
+}
+*/
