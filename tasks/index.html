@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tasks</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css" />
+    <link rel="stylesheet" href="css/task.css" />
+  </head>
+  <body>
+    <div class="task">
+      <input type="checkbox" name="check-1" />
+      <div class="content">
+        <h6>Search pokemon</h6>
+        <p>Due: 25/09/21</p>
+      </div>
+    </div>
+
+    <hr />
+
+    <form>
+      <div class="row">
+        <div>
+          <label for="task">Task</label>
+          <input type="text" id="task-input" name="task"></input>
+        </div>
+        <div>
+          <label for="date">Due</label>
+          <input type="date" id="date-input" name="date"></input>
+        </div>
+      </div>
+      <button type="button">
+        Create
+      </button>
+    </form>
+  </body>
+</html>

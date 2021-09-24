@@ -1,0 +1,64 @@
+:root {
+  --text-primary: #000;
+  --text-secondary: rgba(0, 0, 0, 0.7);
+  --dividers: rgba(0, 0, 0, 0.12);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text-primary: #fff;
+    --text-secondary: rgba(255, 255, 255, 0.7);
+    --dividers: rgba(255, 255, 255, 0.12);
+  }
+}
+
+.task {
+  display: flex;
+  border-radius: 10px;
+  border: 1px solid var(--dividers);
+  padding: 1rem 0.8rem;
+}
+
+.task h6,
+.task p {
+  margin: 0;
+}
+
+.task input[type='checkbox'] {
+  margin-right: 1.2rem;
+}
+
+.task h6 {
+  font-size: 1.25rem;
+  color: var(--text-primary);
+}
+
+.task p {
+  margin-top: 0.8rem;
+  color: var(--text-secondary);
+}
+
+
+.task input[type='checkbox']:checked ~ div {
+    text-decoration: line-through;
+    opacity: 0.8;
+}
+
+hr {
+    margin: 2rem 0;
+}
+
+form .row {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+form .row div:first-of-type {
+    flex: 1;
+}
+
+form .row div:first-of-type input {
+    width: calc(100% - 2rem);
+    height: 100%;
+}
