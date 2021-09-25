@@ -38,27 +38,30 @@
   color: var(--text-secondary);
 }
 
-
 .task input[type='checkbox']:checked ~ div {
-    text-decoration: line-through;
-    opacity: 0.8;
+  text-decoration: line-through;
+  opacity: 0.8;
+}
+
+.task:not(:last-child) {
+  margin-bottom: 0.8rem;
 }
 
 hr {
-    margin: 2rem 0;
+  margin: 2rem 0;
 }
 
 form .row {
-    display: flex;
-    align-items: center;
-    width: 100%;
+  display: flex;
+  align-items: center;
+  width: 100%;
 }
 
 form .row div:first-of-type {
-    flex: 1;
+  flex: 1;
 }
 
 form .row div:first-of-type input {
-    width: calc(100% - 2rem);
-    height: 100%;
+  width: calc(100% - 2rem);
+  height: 100%;
 }
