@@ -10,12 +10,8 @@
     <link rel="stylesheet" href="css/task.css" />
   </head>
   <body>
-    <div class="task">
-      <input type="checkbox" name="check-1" />
-      <div class="content">
-        <h6>Search pokemon</h6>
-        <p>Due: 25/09/21</p>
-      </div>
+    <div id="tasks">
+      <!-- Acá irán las tareas -->
     </div>
 
     <hr />
@@ -31,9 +27,11 @@
           <input type="date" id="date-input" name="date"></input>
         </div>
       </div>
-      <button type="button">
+      <button id="create-btn" type="button">
         Create
       </button>
     </form>
+
+    <script src="js/tasks.js"></script>
   </body>
 </html>
