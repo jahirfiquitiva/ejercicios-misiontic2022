@@ -1,20 +1,15 @@
 import Task from './../Task/Task'; // Task.js
 
-const tasks = [{
-  task: 'Search pokemon',
-  due: new Date('2021-09-25'),
-  done: false,
-}, {
-  task: 'Catch pokemon',
-  due: new Date('2021-09-25'),
-  done: false,
-}]
+const TasksList = (props) => {
+  // Object Destructuring
+  // const tasks = props.tasks;
+  const { tasks } = props;
 
-const TasksList = () => { 
+  // if (tasks === undefined) .. []
   return (
     <div>
-      {tasks.map((item, index) => {
-        return <Task task={item.task} />
+      {(tasks || []).map((item, index) => {
+        return <Task key={index} task={item.task} due={item.due} done={item.done} />;
       })}
     </div>
   );

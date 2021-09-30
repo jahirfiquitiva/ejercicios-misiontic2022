@@ -1,5 +1,34 @@
 .task {
-    border-radius: 8px;
-    border: 1px solid #000;
+  display: flex;
+  border-radius: 10px;
+  border: 1px solid var(--dividers);
+  padding: 1rem 0.8rem;
 }
 
+.task h6,
+.task p {
+  margin: 0;
+}
+
+.task input[type='checkbox'] {
+  margin-right: 1.2rem;
+}
+
+.task h6 {
+  font-size: 1.25rem;
+  color: var(--text-primary);
+}
+
+.task p {
+  margin-top: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.task input[type='checkbox']:checked ~ div {
+  text-decoration: line-through;
+  opacity: 0.8;
+}
+
+.task:not(:last-child) {
+  margin-bottom: 0.8rem;
+}

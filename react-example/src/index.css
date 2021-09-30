@@ -1,5 +1,4 @@
 body {
-  margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -12,6 +11,16 @@ code {
     monospace;
 }
 
-.task {
-  border: 8px solid red;
+:root {
+  --text-primary: #000;
+  --text-secondary: rgba(0, 0, 0, 0.7);
+  --dividers: rgba(0, 0, 0, 0.12);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text-primary: #fff;
+    --text-secondary: rgba(255, 255, 255, 0.7);
+    --dividers: rgba(255, 255, 255, 0.12);
+  }
 }
