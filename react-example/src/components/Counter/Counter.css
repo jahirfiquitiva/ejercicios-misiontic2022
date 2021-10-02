@@ -1,0 +1,16 @@
+p {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+p.menor-que-treinta {
+    color: red;
+}
+
+p.menor-que-setenta {
+    color: yellow;
+}
+
+p.mayor-igual-a-cien {
+    color: green;
+}
