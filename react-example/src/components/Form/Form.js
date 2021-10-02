@@ -1,16 +1,22 @@
-import { useState } from 'react';
-
-// Hooks
+import { useState, useContext } from 'react';
+import PropTypes from 'prop-types';
+import { AppContext } from '../AppContext/AppContext';
+import { Link } from 'react-router-dom';
+import './Form.css';
+// PropTypes
 
 const Form = (props) => {
-  const { createTask } = props;
+  const datos = useContext(AppContext);
   const [valorTarea, cambiarValorDeTarea] = useState('');
   const [valorFecha, cambiarValorDeFecha] = useState('2021-09-29');
 
   const buttonClick = () => {
-    console.log(valorTarea);
-    createTask(valorTarea, valorFecha);
-    // fetch() -> url 
+    const newTask = {
+      task: valorTarea,
+      due: new Date(valorFecha),
+      done: false,
+    };
+    datos.setTasks([...datos.tasks, newTask]);
   };
 
   return (
@@ -40,8 +46,20 @@ const Form = (props) => {
       <button type={'button'} onClick={buttonClick}>
         Crear tarea
       </button>
+      <br />
+      <br />
+      <Link className={'button'} to={'/tasks'}>
+        Ver tareas
+      </Link>
     </form>
   );
+};
+
+Form.propTypes = {
+  // PropTypes.string
+  // PropTypes.bool;
+  // PropTypes.number;
+  createTask: PropTypes.func, // createTask => function
 };
 
 export default Form;

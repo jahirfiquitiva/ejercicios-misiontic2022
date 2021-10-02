@@ -3,38 +3,28 @@ import TasksList from './../TasksList/TasksList'; // Task.js
 import Form from '../Form/Form';
 import { useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
+import AppContextComponent, { AppContext } from '../AppContext/AppContext';
+
+// Context
 
 function App() {
-  const [tasks, setTasks] = useState([]);
-
-  const createTask = (task, due) => {
-    const newTask = {
-      task,
-      due: new Date(due),
-      done: false,
-    };
-
-    setTasks([...tasks, newTask]);
-  };
-
   return (
     <Switch>
-      <Route exact path={'/'}>
-        <div>
-          <p>Página principal</p>
-          <TasksList tasks={tasks} />
-          <Form createTask={createTask} />
-        </div>
-      </Route>
+        <Route exact path={'/'}>
+          <div>
+            <p>Página principal</p>
+          </div>
+        </Route>
+        <AppContextComponent>
+        <Route path={'/login'}>
+          <Form />
+        </Route>
 
-      <Route exact path={'/login'}>
-        <Form createTask={createTask} />
-      </Route>
-
-      <Route exact path={'/ventas'}>
-        <TasksList tasks={tasks} />
-      </Route>
-    </Switch>
+        <Route path={'/tasks'}>
+          <TasksList />
+        </Route>
+    </AppContextComponent>
+      </Switch>
   );
 }
 

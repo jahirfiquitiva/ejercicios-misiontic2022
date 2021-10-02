@@ -1,6 +1,6 @@
+import PropTypes from 'prop-types';
 import './Task.css';
 
-// function Task() {
 const Task = (props) => {
   return (
     <div className='task'>
@@ -14,5 +14,11 @@ const Task = (props) => {
     </div>
   );
 };
+
+Task.propTypes = {
+  task: PropTypes.string.isRequired,
+  due: PropTypes.object.isRequired,
+  done: PropTypes.bool, // boolean
+}
 
 export default Task;
