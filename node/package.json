@@ -1,0 +1,20 @@
+{
+  "name": "node-example",
+  "version": "1.0.0",
+  "main": "app.js",
+  "author": "Jahir Fiquitiva",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "node app.js",
+    "watch": "nodemon app.js"
+  },
+  "devDependencies": {
+    "dotenv": "^10.0.0",
+    "nodemon": "^2.0.13"
+  },
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "express": "^4.17.1"
+  }
+}
