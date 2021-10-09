@@ -25,6 +25,7 @@ const Form = (props) => {
       cambiarValorDeFecha(task.due);
     };
     getTaskData();
+    // eslint-disable-next-line
   }, []);
 
   const buttonClick = async () => {
