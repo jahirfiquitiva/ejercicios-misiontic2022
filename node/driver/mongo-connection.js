@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
-const mongoUrl = 'mongodb+srv://misiontic:123misiontic456@esp-cluster.2rtyp.mongodb.net/misiontic';
+const dbUsername = process.env.DB_USERNAME;
+const dbPassword = process.env.DB_PASSWORD;
+const dbUrl = process.env.DB_URL;
+
+const mongoUrl = `mongodb+srv://${dbUsername}:${dbPassword}@${dbUrl}/misiontic`;
 
 mongoose.set('runValidators', true);
 

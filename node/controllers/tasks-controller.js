@@ -11,13 +11,16 @@ const createTask = (request, response) => {
     return response.status(400).send({ ok: false });
   }
 
-  const newTask = {
+  const newTask = new Task({
     ...task,
-    id: new Date().getTime(),
-  };
-
-  tasks.push(newTask);
-  return response.send({ ok: true, task: newTask, tasks });
+    _id: new Date().getTime(),
+  });
+  newTask.save((error, result) => {
+    if (error) {
+      return response.status(500).send({ error });
+    }
+    return response.send(result);
+  });
 };
 
 // GET
@@ -31,17 +34,46 @@ const readTasks = (request, response) => {
 
   Task.find(filter, (error, result) => {
     if (error) {
-      return response.status(500).send({ error })
+      return response.status(500).send({ error });
     }
-    return response.send(result)
-  })
+    return response.send(result);
+  });
 };
 
 // PATCH
-const updateTask = () => {};
+const updateTask = (request, response) => {
+  const id = request.params.id;
+  if (!id) {
+    return response.status(400).send({ error: 'No hay id, para modificar' });
+  }
+
+  Task.updateOne({ _id: id }, request.body, (error, result) => {
+    if (error) {
+      return response.status(500).send({ error });
+    }
+
+    Task.find({ _id: id }, (error, result) => {
+      if (error) {
+        return response.status(500).send({ error });
+      }
+      return response.send(result);
+    });
+  });
+};
 
 // DELETE
-const deleteTask = () => {};
+const deleteTask = (request, response) => {
+  const id = request.params.id;
+  if (!id) {
+    return response.status(400).send({ error: 'No hay id, para eliminar' });
+  }
+  Task.remove({ _id: id }, (error, result) => {
+    if (error) {
+      return response.status(500).send({ error });
+    }
+    return response.send(result);
+  });
+};
 
 module.exports = {
   createTask,
