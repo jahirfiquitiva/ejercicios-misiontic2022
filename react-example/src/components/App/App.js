@@ -13,13 +13,17 @@ function App() {
         <div>
           <p>Página principal</p>
           <br/>
-          <Link to={'/login'}>Crear tareas</Link>
+          <Link to={'/create'}>Crear tareas</Link>
           <br/>
           <Link to={'/tasks'}>Ver tareas</Link>
         </div>
       </Route>
       <AppContextComponent>
-        <Route path={'/login'}>
+        <Route path={'/create'}>
+          <Form />
+        </Route>
+
+        <Route path={'/edit/:id?'}>
           <Form />
         </Route>
 

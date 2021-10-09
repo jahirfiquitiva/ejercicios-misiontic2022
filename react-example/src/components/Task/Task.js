@@ -8,6 +8,10 @@ const Task = (props) => {
       <div>
         <h6>{props.task}</h6>
         <p>{`Due: ${props.due}`}</p>
+
+        <a href={`/edit/${props.id}`}>
+          Editar tarea
+        </a>
       </div>
     </div>
   );

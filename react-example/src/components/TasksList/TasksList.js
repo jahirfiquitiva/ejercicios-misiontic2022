@@ -16,11 +16,11 @@ const TasksList = (props) => {
 
   return (
     <div>
-      {(tasks || []).map((item, index) => {
-        return <Task key={index} task={item.task} due={item.due} done={item.done} />;
-      })}
-      <br />
       <Link to={'/login'}>Crear tareas</Link>
+      <br />
+      {(tasks || []).map((item, index) => {
+        return <Task key={index} id={item._id} task={item.task} due={item.due} done={item.done} />;
+      })}
     </div>
   );
 };
