@@ -4,8 +4,13 @@ import './Task.css';
 
 const Task = (props) => {
   const deleteTask = async () => {
-    const resultado = await httpDelete(`${process.env.REACT_APP_BACKEND_URL}/tasks/${props.id}`);
-    window.location.reload(false);
+    httpDelete(`${process.env.REACT_APP_BACKEND_URL}/tasks/${props.id}`)
+      .then(() => {
+        window.location.reload(false);
+      })
+      .catch((e) => {
+        console.error(e);
+      });
   };
 
   return (
