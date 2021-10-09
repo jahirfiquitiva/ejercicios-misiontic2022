@@ -11,10 +11,7 @@ const createTask = (request, response) => {
     return response.status(400).send({ ok: false });
   }
 
-  const newTask = new Task({
-    ...task,
-    _id: new Date().getTime(),
-  });
+  const newTask = new Task(task);
   newTask.save((error, result) => {
     if (error) {
       return response.status(500).send({ error });

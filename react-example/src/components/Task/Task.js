@@ -7,9 +7,7 @@ const Task = (props) => {
       <input type={'checkbox'} checked={props.done} />
       <div>
         <h6>{props.task}</h6>
-        <p>{`Due: ${props.due.getDate() + 1}/${
-          props.due.getMonth() + 1
-        }/${props.due.getFullYear()}`}</p>
+        <p>{`Due: ${props.due}`}</p>
       </div>
     </div>
   );

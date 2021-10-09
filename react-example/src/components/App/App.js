@@ -3,7 +3,6 @@ import AppContextComponent from '../AppContext/AppContext';
 import TasksList from './../TasksList/TasksList'; // Task.js
 import Form from '../Form/Form';
 import './App.css';
-import Counter from '../Counter/Counter';
 
 // Context
 
@@ -13,7 +12,6 @@ function App() {
       <Route exact path={'/'}>
         <div>
           <p>Página principal</p>
-          <Counter />
         </div>
       </Route>
       <AppContextComponent>
