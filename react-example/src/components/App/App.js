@@ -1,4 +1,4 @@
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Link } from 'react-router-dom';
 import AppContextComponent from '../AppContext/AppContext';
 import TasksList from './../TasksList/TasksList'; // Task.js
 import Form from '../Form/Form';
@@ -12,6 +12,10 @@ function App() {
       <Route exact path={'/'}>
         <div>
           <p>Página principal</p>
+          <br/>
+          <Link to={'/login'}>Crear tareas</Link>
+          <br/>
+          <Link to={'/tasks'}>Ver tareas</Link>
         </div>
       </Route>
       <AppContextComponent>
