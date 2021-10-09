@@ -10,10 +10,10 @@
     "watch": "nodemon app.js"
   },
   "devDependencies": {
-    "dotenv": "^10.0.0",
     "nodemon": "^2.0.13"
   },
   "dependencies": {
+    "dotenv": "^10.0.0",
     "chalk": "^4.1.2",
     "express": "^4.17.1",
     "mongoose": "^6.0.10"
