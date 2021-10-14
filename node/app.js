@@ -6,6 +6,7 @@ const cors = require('cors');
 require('./driver/mongo-connection');
 
 const tasksRouter = require('./routes/tasks-routes');
+const usersRouter = require('./routes/users-routes');
 
 const port = process.env.PORT || 8080;
 const app = express();
@@ -16,6 +17,7 @@ app.use(express.json());
 // routes // controllers // models
 
 app.use('/api/tasks', tasksRouter);
+app.use('/api/users', usersRouter);
 
 app.get('*', (request, response) => {
   return response.send('Not found!');

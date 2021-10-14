@@ -1,4 +1,6 @@
 const express = require('express');
+const { validateUser } = require('./../middlewares/validate-user');
+const { validateRole } = require('../middlewares/validate-role');
 const {
   createTask,
   readTasks,
@@ -9,7 +11,7 @@ const {
 // Router
 const router = express.Router();
 
-router.post('/', createTask);
+router.post('/', [validateUser, validateRole], createTask);
 
 router.get('/', readTasks);
 
