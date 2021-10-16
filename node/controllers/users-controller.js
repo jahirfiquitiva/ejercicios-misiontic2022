@@ -1,30 +1,33 @@
+const { OAuth2Client } = require('google-auth-library');
+const client = new OAuth2Client(process.env.CLIENT_ID);
+
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('./../models/user-model');
 
-// POST
-const createUser = async (request, response) => {
-  const user = request.body;
-
+const createUserFromData = async (response, user) => {
   if (!user.name) {
-    return response.status(400).send({
+    return {
       ok: false,
       error: 'Falta nombre',
-    });
+      status: 400,
+    };
   }
 
   if (!user.email) {
-    return response.status(400).send({
+    return {
       ok: false,
       error: 'Falta correo',
-    });
+      status: 400,
+    };
   }
 
   if (!user.withGoogle && !user.password) {
-    return response.status(400).send({
+    return {
       ok: false,
       error: 'Falta contraseña',
-    });
+      status: 400,
+    };
   }
 
   let encryptedPassword;
@@ -35,10 +38,12 @@ const createUser = async (request, response) => {
 
   const existingUser = await User.findOne({ email: user.email });
   if (existingUser && existingUser._id) {
-    return response.status(302).send({
+    return {
       ok: false,
       error: 'El usuario ya está registrado',
-    });
+      status: 302,
+      user: existingUser,
+    };
   }
 
   const newUser = new User({
@@ -47,10 +52,17 @@ const createUser = async (request, response) => {
   });
   newUser.save((error, result) => {
     if (error) {
-      return response.status(500).send({ error });
+      return { error, status: 500 };
     }
-    return response.send(result);
+    return result;
   });
+};
+
+// POST
+const createUser = async (request, response) => {
+  const user = request.body;
+  const resultado = await createUserFromData(response, user);
+  return response.status(resultado.status || 200).send(resultado);
 };
 
 // GET
@@ -68,6 +80,14 @@ const readUsers = (request, response) => {
     }
     return response.send(result);
   });
+};
+
+const readUserData = async (request, response) => {
+  const user = await User.findOne({ _id: request.userId });
+  if (user) {
+    return response.send(user);
+  }
+  return response.status(404).send({ error: 'No existe el usuario' });
 };
 
 const authUser = async (request, response) => {
@@ -100,8 +120,62 @@ const authUser = async (request, response) => {
   });
 };
 
+const authWithGoogle = async (request, response) => {
+  try {
+    const tokenFromHeader = request.header('misiontic-auth-user');
+    const ticket = await client.verifyIdToken({
+      idToken: tokenFromHeader,
+      audience: process.env.CLIENT_ID,
+    });
+    const payload = ticket.getPayload();
+    if (!payload.sub) {
+      return response.status(401).send({
+        ok: false,
+        error: 'Usuario no autorizado!',
+      });
+    }
+    const user = {
+      name: payload.name,
+      email: payload.email,
+      withGoogle: true,
+    };
+    const resultado = await createUserFromData(response, user);
+    const status = resultado.status || 200;
+    if (status === 302 || status === 200) {
+      const userId = resultado._id || resultado.user._id;
+      if (!userId) {
+        return response.status(401).send({
+          ok: false,
+          error: 'Usuario no autorizado',
+        });
+      }
+
+      // 3. generar un token
+      const token = jwt.sign({ id: userId }, process.env.JWT_SECRET, {
+        expiresIn: '1h',
+      });
+      return response.send({
+        ok: true,
+        token,
+        email: user.email,
+      });
+    }
+    return response.status(401).send({
+      ok: false,
+      error: 'Usuario no autorizado',
+    });
+  } catch (e) {
+    return response.status(500).send({
+      ok: false,
+      error: e.message,
+    });
+  }
+};
+
 module.exports = {
   createUser,
   readUsers,
+  readUserData,
   authUser,
+  authWithGoogle,
 };

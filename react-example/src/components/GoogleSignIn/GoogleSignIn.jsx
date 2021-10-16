@@ -1,23 +1,37 @@
 import { useState, useEffect } from 'react';
+import { httpPost } from '../../utils/fetch';
+
+const getToken = () => {
+  return window ? localStorage.getItem('token') : '';
+};
 
 const GoogleSignIn = () => {
   const [gsiScriptLoaded, setGsiScriptLoaded] = useState(false);
-  const [user, setUser] = useState(undefined);
 
-  const handleGoogleSignIn = (res) => {
+  const handleGoogleSignIn = async (res) => {
     if (!res.clientId || !res.credential) return;
-    console.log(res.credential);
 
-    // TODO: Enviar credential al backend
+    const response = await httpPost(`${process.env.REACT_APP_BACKEND_URL}/users/auth/google`, {
+      headers: {
+        'misiontic-auth-user': res.credential,
+      },
+      body: '',
+    });
+    localStorage.setItem('token', response.token);
+    localStorage.setItem('email', response.email);
+    window.location.reload();
+  };
+
+  const logOut = () => {
+    window.google.accounts.id.revoke(localStorage.getItem('email'), (complete) => {
+      localStorage.clear();
+      window.location.reload();
+    });
   };
 
   useEffect(() => {
-    if (user?._id || gsiScriptLoaded) return;
-
+    if (gsiScriptLoaded) return;
     const initializeGsi = () => {
-      console.log('Initialized GSI');
-      // Typescript will complain about window.google
-      // Add types to your `react-app-env.d.ts` or //@ts-ignore it.
       if (!window.google || gsiScriptLoaded) return;
 
       setGsiScriptLoaded(true);
@@ -29,7 +43,6 @@ const GoogleSignIn = () => {
         document.getElementById('buttonDiv'),
         { theme: 'outline', size: 'large' } // customization attributes
       );
-      window.google.accounts.id.prompt();
     };
 
     const script = document.createElement('script');
@@ -40,11 +53,13 @@ const GoogleSignIn = () => {
     document.body.appendChild(script);
 
     return () => {
-      // Cleanup function that runs when component unmounts
       window.google?.accounts.id.cancel();
-      // document.getElementById('google-client-script')?.remove();
     };
-  }, [user?._id, gsiScriptLoaded]);
+  }, [gsiScriptLoaded]);
+
+  if (getToken()) {
+    return <button onClick={logOut}>Cerrar sesión</button>;
+  }
 
   return (
     <>

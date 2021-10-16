@@ -11,8 +11,8 @@ const customFetch = async (url, options) => {
   }
 };
 
-export const httpGet = (url) => {
-  return customFetch(url);
+export const httpGet = (url, options) => {
+  return customFetch(url, options);
 };
 
 export const httpPost = async (url, options) => {

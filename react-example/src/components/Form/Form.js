@@ -20,9 +20,13 @@ const Form = (props) => {
     }
     const getTaskData = async () => {
       const taskData = await httpGet(`${process.env.REACT_APP_BACKEND_URL}/tasks/${params.id}`);
-      const task = taskData[0];
-      cambiarValorDeTarea(task.task);
-      cambiarValorDeFecha(task.due);
+      if (taskData) {
+        const task = taskData[0];
+        if (task) {
+          cambiarValorDeTarea(task.task);
+          cambiarValorDeFecha(task.due);
+        }
+      }
     };
     getTaskData();
   }, [isForEdit, params.id]);
@@ -35,9 +39,12 @@ const Form = (props) => {
     };
 
     if (isForEdit) {
-      const updatedTask = await httpPatch(`${process.env.REACT_APP_BACKEND_URL}/tasks/${params.id}`, {
-        body: JSON.stringify(newTask),
-      });
+      const updatedTask = await httpPatch(
+        `${process.env.REACT_APP_BACKEND_URL}/tasks/${params.id}`,
+        {
+          body: JSON.stringify(newTask),
+        }
+      );
       console.log(updatedTask);
       if (updatedTask[0]._id) {
         setTareaCreada(true);
@@ -57,6 +64,9 @@ const Form = (props) => {
       }
     }
   };
+
+  // if (condicion) { algo } else { otraCosa }
+  // condicion ? algo : otraCosa
 
   return (
     <form>

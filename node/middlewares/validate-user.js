@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 
 const validateUser = (request, response, next) => {
   const tokenFromHeader = request.header('misiontic-auth-user');
+  console.log(tokenFromHeader)
   if (!tokenFromHeader) {
     return response.status(401).send({
       ok: false,

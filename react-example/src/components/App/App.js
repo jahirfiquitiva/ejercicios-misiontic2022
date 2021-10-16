@@ -4,20 +4,28 @@ import TasksList from './../TasksList/TasksList'; // Task.js
 import Form from '../Form/Form';
 import './App.css';
 import GoogleSignIn from '../GoogleSignIn/GoogleSignIn';
+import { getToken } from '../../utils/getToken';
+import Role from '../Role/Role';
 
 // Context
 
 function App() {
+  const token = getToken();
   return (
     <Switch>
       <Route exact path={'/'}>
         <div>
           <p>Página principal</p>
           <GoogleSignIn />
-          <br />
-          <Link to={'/create'}>Crear tareas</Link>
-          <br />
-          <Link to={'/tasks'}>Ver tareas</Link>
+          {token ? (
+            <>
+              <br />
+              <Link to={'/create'}>Crear tareas</Link>
+              <br />
+              <Link to={'/tasks'}>Ver tareas</Link>
+            </>
+          ) : null}
+          <Role/> 
         </div>
       </Route>
       <AppContextComponent>
